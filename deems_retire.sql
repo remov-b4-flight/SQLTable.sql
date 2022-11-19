@@ -3,7 +3,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE view [dbo].[deems_retire] as 
-select caption,[dateTime],collectionset from ( select *, row_number() over (PARTITION BY caption ORDER BY [dateTime] DESC) AS number FROM photos) as lastshot 
+select caption,[dateTime],collectionSet from ( select *, row_number() over (PARTITION BY caption ORDER BY [dateTime] DESC) AS number FROM photos) as lastshot 
 where lastshot.number = 1 and lastshot.[dateTime] < DATEADD(year, -5, GETDATE()) 
-and collectionset != '%RETIRED'
+and collectionSet != '%RETIRED'
 GO
